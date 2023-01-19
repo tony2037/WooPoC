@@ -17,6 +17,7 @@ func main() {
 	pTLS := NewTLSGenerator("cert.pem", "key.pem")
 	pTLS.GenKey()
 
+	// Reference: https://pkg.go.dev/net/http#ListenAndServeTLS
 	http.HandleFunc("/", index)
 	log.Printf("About to listen on %v. Go to https://127.0.0.1:%v/", serverPort, serverPort)
 	err := http.ListenAndServeTLS(fmt.Sprintf(":%v", serverPort), pTLS.certFile, pTLS.keyFile, nil)
