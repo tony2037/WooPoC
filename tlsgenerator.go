@@ -12,6 +12,7 @@ import (
 	"log"
 	"math/big"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -29,14 +30,15 @@ func NewTLSGenerator(_certFile string, _keyFile string) *TLSGenerator {
 	instance.IsKeyExists()
 	if !instance.init {
 		fmt.Printf("Did not find %v &/ %v \n", instance.certFile, instance.keyFile)
+		instance.GenKey()
 	}
 	return instance
 }
 
 func (pInstance *TLSGenerator) IsKeyExists() bool {
-	_, certFileErr := os.Stat(pInstance.certFile)
-	_, keyFileErr := os.Stat(pInstance.keyFile)
-	pInstance.init = os.IsExist(certFileErr) && os.IsExist(keyFileErr)
+	_, certFileErr := os.Stat(filepath.Join("./", pInstance.certFile))
+	_, keyFileErr := os.Stat(filepath.Join("./", pInstance.keyFile))
+	pInstance.init = !(os.IsNotExist(certFileErr) || os.IsNotExist(keyFileErr))
 	return pInstance.init
 }
 

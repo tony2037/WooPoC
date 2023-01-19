@@ -17,8 +17,6 @@ func main() {
 	keyFile := "key.pem"
 
 	pTLS := NewTLSGenerator(certFile, keyFile)
-	pTLS.GenKey()
-
 	pMaster := NewMaster()
 
 	// Reference: https://pkg.go.dev/net/http#ListenAndServeTLS
