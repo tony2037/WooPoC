@@ -22,6 +22,7 @@ func main() {
 	// Reference: https://pkg.go.dev/net/http#ListenAndServeTLS
 	http.HandleFunc("/", index)
 	http.HandleFunc("/submit", pMaster.MasterTaskSubmission)
+	http.HandleFunc("/add", pMaster.MasterAdd)
 	log.Printf("About to listen on %v. Go to https://127.0.0.1:%v/", serverPort, serverPort)
 	err := http.ListenAndServeTLS(fmt.Sprintf(":%v", serverPort), pTLS.certFile, pTLS.keyFile, nil)
 	log.Fatal(err)
