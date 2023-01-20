@@ -32,6 +32,7 @@ func main() {
 	}
 }
 
+// Reference: https://github.com/shuza/kubernetes-go-grpc/blob/master/api/main.go
 func (s *server) Compute(cxt context.Context, r *pb.AddRequest) (*pb.AddResponse, error) {
 	result := &pb.AddResponse{}
 	result.Result = r.A + r.B
